@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vedanth Raja | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --accent-color: #39FF14;
+            --text-main: #ffffff;
+            --text-dim: #a0a0a0;
+            --font-mono: 'JetBrains Mono', monospace;
+            --font-sans: 'Inter', sans-serif;
+            --glow: 0 0 10px rgba(57, 255, 20, 0.4);
+            --glow-strong: 0 0 20px rgba(57, 255, 20, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .mono {
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        /* --- Navbar --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid rgba(57, 255, 20, 0.1);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            color: var(--accent-color);
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-shadow: var(--glow);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--accent-color);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+            box-shadow: var(--glow);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* --- Layout --- */
+        section {
+            padding: 100px 10%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Hero --- */
+        #hero {
+            align-items: flex-start;
+        }
+
+        .hero-name {
+            font-size: clamp(3rem, 8vw, 6rem);
+            color: var(--text-main);
+            margin-bottom: 1rem;
+        }
+
+        .typewriter {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+            min-height: 1.2em;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 12px;
+            height: 1.2em;
+            background: var(--accent-color);
+            margin-left: 5px;
+            animation: blink 0.8s infinite;
+            vertical-align: middle;
+            box-shadow: var(--glow);
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        .hero-sub {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            max-width: 600px;
+            margin-bottom: 3rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            font-family: var(--font-mono);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            background: transparent;
+        }
+
+        .cta-btn:hover {
+            background: var(--accent-color);
+            color: var(--bg-color);
+            box-shadow: var(--glow-strong);
+        }
+
+        /* --- About --- */
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+            text-shadow: var(--glow);
+        }
+
+        .terminal-card {
+            background: #111;
+            border: 1px solid #333;
+            padding: 1.5rem;
+            font-family: var(--font-mono);
+            position: relative;
+            box-shadow: 10px 10px 0 rgba(57, 255, 20, 0.1);
+        }
+
+        .terminal-header {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: #333;
+        }
+
+        .terminal-content p {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .terminal-key { color: var(--accent-color); }
+
+        /* --- Skills --- */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .skill-tag {
+            padding: 0.5rem 1.2rem;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--accent-color);
+            color: var(--bg-color);
+            box-shadow: var(--glow);
+        }
+
+        /* --- Projects --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: #111;
+            padding: 2rem;
+            border-left: 4px solid var(--accent-color);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--glow);
+            background: #161616;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .project-desc {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tag {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--accent-color);
+            opacity: 0.8;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .project-link {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .project-link:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Contact --- */
+        #contact {
+            text-align: center;
+            align-items: center;
+            min-height: 60vh;
+        }
+
+        .email-copy {
+            font-size: clamp(1.2rem, 4vw, 2.5rem);
+            color: var(--accent-color);
+            font-family: var(--font-mono);
+            margin: 2rem 0;
+            cursor: pointer;
+            position: relative;
+            display: inline-block;
+        }
+
+        .email-copy:hover {
+            text-shadow: var(--glow-strong);
+        }
+
+        .copy-hint {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+            white-space: nowrap;
+        }
+
+        .email-copy:hover .copy-hint {
+            opacity: 1;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            font-family: var(--font-mono);
+            color: var(--text-dim);
+            font-size: 1rem;
+        }
+
+        .social-icon:hover {
+            color: var(--accent-color);
+            text-shadow: var(--glow);
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid #1a1a1a;
+            color: #444;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+        }
+
+        /* --- Mobile Responsiveness --- */
+        @media (max-width: 768px) {
+            nav { padding: 1rem; }
+            .nav-links { display: none; }
+            section { padding: 80px 5%; }
+            .about-container { grid-template-columns: 1fr; }
+            .hero-name { font-size: 3.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-logo">VR_</div>
+        <div class="nav-links">
+            <a href="#hero">Home</a>
+            <a href="#about">About</a>
+            <a href="#projects">Work</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <main>
+        <section id="hero">
+            <h1 class="hero-name mono">Vedanth Raja</h1>
+            <div class="typewriter mono">
+                <span id="typewriter-text"></span><span class="cursor"></span>
+            </div>
+            <p class="hero-sub">2nd Year BTech CSE Student | Currently learning front-end development and building things for the web.</p>
+            <a href="#projects" class="cta-btn">View My Work</a>
+        </section>
+
+        <section id="about" class="reveal">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-container">
+                <div class="about-text">
+                    <p>Hey, I'm Vedanth — a second-year CSE student based in India, currently deep in front-end web development. I'm building projects, learning by doing, and working toward freelancing.</p>
+                    <p style="margin-top: 1.5rem;">I focus on writing clean code and creating interfaces that are both functional and visually striking.</p>
+                </div>
+                <div class="terminal-card">
+                    <div class="terminal-header">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                    <div class="terminal-content">
+                        <p><span class="terminal-key">name:</span> "Vedanth Raja"</p>
+                        <p><span class="terminal-key">location:</span> "India"</p>
+                        <p><span class="terminal-key">focus:</span> ["Front-End", "UI/UX"]</p>
+                        <p><span class="terminal-key">status:</span> "Available for work"</p>
+                        <p><span class="terminal-key">level:</span> "BTech CSE 2nd Year"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="reveal">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-tag">HTML5</div>
+                <div class="skill-tag">CSS3</div>
+                <div class="skill-tag">JavaScript</div>
+                <div class="skill-tag">React (Learning)</div>
+                <div class="skill-tag">Git</div>
+                <div class="skill-tag">GitHub</div>
+                <div class="skill-tag">Responsive Design</div>
+            </div>
+        </section>
+
+        <section id="projects" class="reveal">
+            <h2 class="section-title">Selected Projects</h2>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div>
+                        <h3 class="project-title">Neural Landing Page</h3>
+                        <p class="project-desc">A dark-themed landing page with smooth animations and a premium glassmorphic UI.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">#HTML</span>
+                            <span class="project-tag">#CSS</span>
+                            <span class="project-tag">#JS</span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Vedanth106" class="project-link" target="_blank">GitHub</a>
+                        <a href="#" class="project-link">Live Demo</a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div>
+                        <h3 class="project-title">Dev Terminal</h3>
+                        <p class="project-desc">A web-based terminal emulator built to showcase CLI-style navigation and custom commands.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">#JavaScript</span>
+                            <span class="project-tag">#Monospace</span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Vedanth106" class="project-link" target="_blank">GitHub</a>
+                        <a href="#" class="project-link">Live Demo</a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <div>
+                        <h3 class="project-title">Vault Interface</h3>
+                        <p class="project-desc">Secured dashboard concept focusing on minimalist typography and high contrast accessibility.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">#Frontend</span>
+                            <span class="project-tag">#SaaS</span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Vedanth106" class="project-link" target="_blank">GitHub</a>
+                        <a href="#" class="project-link">Live Demo</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="reveal">
+            <h2 class="section-title">Let's Connect</h2>
+            <div class="email-copy" id="email-trigger">
+                vedanthrraja@gmail.com
+                <span class="copy-hint" id="copy-status">Click to copy</span>
+            </div>
+            <div class="social-links">
+                <a href="https://github.com/Vedanth106" class="social-icon" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/vedanthraja/" class="social-icon" target="_blank">LinkedIn</a>
+                <a href="https://x.com/Vedanth_Raja_" class="social-icon" target="_blank">Twitter/X</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Built by Vedanth Raja &middot; 2025</p>
+    </footer>
+
+    <script>
+        // --- Typewriter Effect ---
+        const textElement = document.getElementById('typewriter-text');
+        const phrases = ["Web Developer.", "CSE Student.", "Building things for the web."];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typeSpeed = 100;
+
+        function type() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            if (isDeleting) {
+                textElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+                typeSpeed = 50;
+            } else {
+                textElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+                typeSpeed = 100;
+            }
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                isDeleting = true;
+                typeSpeed = 2000; // Pause at end
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(type, typeSpeed);
+        }
+
+        // --- Scroll Animations ---
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // --- Copy Email ---
+        const emailTrigger = document.getElementById('email-trigger');
+        const copyStatus = document.getElementById('copy-status');
+
+        emailTrigger.addEventListener('click', () => {
+            const email = "vedanthrraja@gmail.com";
+            navigator.clipboard.writeText(email).then(() => {
+                copyStatus.textContent = "Copied!";
+                setTimeout(() => {
+                    copyStatus.textContent = "Click to copy";
+                }, 2000);
+            });
+        });
+
+        // Initialize typewriter
+        window.onload = type;
+    </script>
+</body>
+</html>
