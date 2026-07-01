@@ -107,6 +107,28 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        section > *:not(.ghost-watermark) {
+            position: relative;
+            z-index: 1;
+        }
+
+        .ghost-watermark {
+            position: absolute;
+            color: transparent;
+            -webkit-text-stroke: 1.5px rgba(57, 255, 20, 0.06);
+            font-size: clamp(80px, 18vw, 180px);
+            font-weight: 700;
+            z-index: 0;
+            pointer-events: none;
+            user-select: none;
+            top: 40px;
+            left: 8%;
+            font-family: var(--font-mono);
+            line-height: 1;
         }
 
         .reveal {
@@ -402,6 +424,7 @@
 
     <main>
         <section id="hero">
+            <div class="ghost-watermark">VEDANTH</div>
             <h1 class="hero-name mono">Vedanth Raja</h1>
             <div class="typewriter mono">
                 <span id="typewriter-text"></span><span class="cursor"></span>
@@ -411,10 +434,11 @@
         </section>
 
         <section id="about" class="reveal">
+            <div class="ghost-watermark">ABOUT</div>
             <h2 class="section-title">About Me</h2>
             <div class="about-container">
                 <div class="about-text">
-                    <p>Hey, I'm Vedanth — a second-year CSE student based in India, currently deep in front-end web development. I'm building projects, learning by doing, and working toward freelancing.</p>
+                    <p>Hey, I'm Vedanth — a Second-year CSE student based in India, currently deep in Front-end web development. I'm building projects, learning by doing, and working toward freelancing.</p>
                     <p style="margin-top: 1.5rem;">I focus on writing clean code and creating interfaces that are both functional and visually striking.</p>
                 </div>
                 <div class="terminal-card">
@@ -424,23 +448,24 @@
                         <div class="dot"></div>
                     </div>
                     <div class="terminal-content">
-                        <p><span class="terminal-key">name:</span> "Vedanth Raja"</p>
-                        <p><span class="terminal-key">location:</span> "India"</p>
-                        <p><span class="terminal-key">focus:</span> ["Front-End", "UI/UX"]</p>
-                        <p><span class="terminal-key">status:</span> "Available for work"</p>
-                        <p><span class="terminal-key">level:</span> "BTech CSE 2nd Year"</p>
+                        <p><span class="terminal-key">Name:</span> Vedanth Raja</p>
+                        <p><span class="terminal-key">Location:</span> India</p>
+                        <p><span class="terminal-key">Focus:</span> [Front-end, UI/UX]</p>
+                        <p><span class="terminal-key">Status:</span> Available for work</p>
+                        <p><span class="terminal-key">Level:</span> BTech CSE 2nd Year</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="skills" class="reveal">
+            <div class="ghost-watermark">SKILLS</div>
             <h2 class="section-title">Technical Skills</h2>
             <div class="skills-grid">
                 <div class="skill-tag">HTML5</div>
                 <div class="skill-tag">CSS3</div>
                 <div class="skill-tag">JavaScript</div>
-                <div class="skill-tag">React (Learning)</div>
+                <div class="skill-tag">React</div>
                 <div class="skill-tag">Git</div>
                 <div class="skill-tag">GitHub</div>
                 <div class="skill-tag">Responsive Design</div>
@@ -448,6 +473,7 @@
         </section>
 
         <section id="projects" class="reveal">
+            <div class="ghost-watermark">WORK</div>
             <h2 class="section-title">Selected Projects</h2>
             <div class="projects-grid">
                 <!-- Project 1 -->
@@ -502,6 +528,7 @@
         </section>
 
         <section id="contact" class="reveal">
+            <div class="ghost-watermark">CONNECT</div>
             <h2 class="section-title">Let's Connect</h2>
             <div class="email-copy" id="email-trigger">
                 vedanthrraja@gmail.com
@@ -516,7 +543,7 @@
     </main>
 
     <footer>
-        <p>Built by Vedanth Raja &middot; 2025</p>
+        <p>Built by Vedanth Raja &middot; 2026</p>
     </footer>
 
     <script>
