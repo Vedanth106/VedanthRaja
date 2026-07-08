@@ -5,11 +5,10 @@
             <stop offset="50%" stop-color="#D97706"/>
             <stop offset="100%" stop-color="#2D1000"/>
         </linearGradient>
-        <linearGradient id="vGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#FEF3C7"/>
-            <stop offset="100%" stop-color="#F59E0B"/>
-        </linearGradient>
     </defs>
-    <rect width="64" height="64" rx="12" fill="url(#bgGrad)"/>
-    <polygon points="12,12 32,50 52,12 44,12 32,42 20,12" fill="url(#vGrad)" opacity="0.9"/>
+    <rect width="64" height="64" rx="10" fill="url(#bgGrad)"/>
+    <polygon points="4,4 32,40 4,40" fill="#080808"/>
+    <polygon points="60,4 32,40 60,40" fill="#080808"/>
+    <rect x="4" y="40" width="56" height="20" fill="#080808"/>
+    <rect x="4" y="52" width="56" height="8" fill="url(#bgGrad)"/>
 </svg>
