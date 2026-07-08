@@ -4,19 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vedanth Raja | Portfolio</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0a0a0a;
+            --bg-color: #0a0d12;
             --accent-color: #39FF14;
-            --text-main: #ffffff;
+            --text-main: #39FF14;
             --text-dim: #a0a0a0;
             --font-mono: 'JetBrains Mono', monospace;
             --font-sans: 'Inter', sans-serif;
             --glow: 0 0 10px rgba(57, 255, 20, 0.4);
             --glow-strong: 0 0 20px rgba(57, 255, 20, 0.6);
+            --card-bg: #111111;
+            --divider-color: #1a1a1a;
+            --deep-green: #1e3a14;
         }
 
         * {
@@ -32,9 +37,11 @@
 
         body {
             background-color: var(--bg-color);
-            color: var(--text-main);
+            color: var(--text-dim);
             font-family: var(--font-sans);
-            line-height: 1.6;
+            font-size: 16px;
+            line-height: 1.8;
+            font-weight: 400;
             overflow-x: hidden;
         }
 
@@ -42,6 +49,7 @@
             font-family: var(--font-mono);
             text-transform: uppercase;
             letter-spacing: -0.02em;
+            color: var(--accent-color);
         }
 
         a {
@@ -50,14 +58,38 @@
             transition: all 0.3s ease;
         }
 
+        /* --- Scroll Progress --- */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: #39FF14;
+            box-shadow: 0 0 6px rgba(57, 255, 20, 0.6);
+            z-index: 9999;
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+
+        /* --- Particle Canvas --- */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
         /* --- Navbar --- */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
-            background: rgba(10, 10, 10, 0.95);
-            border-bottom: 1px solid rgba(57, 255, 20, 0.1);
+            background: rgba(10, 13, 18, 0.95);
+            border-bottom: 1px solid var(--divider-color);
             padding: 1.5rem 2rem;
             display: flex;
             justify-content: space-between;
@@ -65,11 +97,32 @@
         }
 
         .nav-logo {
-            color: var(--accent-color);
             font-family: var(--font-mono);
             font-weight: 700;
             font-size: 1.2rem;
+            cursor: pointer;
+            position: relative;
+            padding-bottom: 4px;
+            display: inline-block;
+        }
+
+        .nav-logo::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1.5px;
+            background: linear-gradient(90deg, #39FF14, transparent);
+        }
+
+        .logo-v {
+            color: var(--accent-color);
             text-shadow: var(--glow);
+        }
+
+        .logo-r {
+            color: #e8eaf0;
         }
 
         .nav-links {
@@ -80,7 +133,7 @@
         .nav-links a {
             color: var(--accent-color);
             font-family: var(--font-mono);
-            font-size: 0.9rem;
+            font-size: 14px;
             position: relative;
         }
 
@@ -113,7 +166,7 @@
 
         section > *:not(.ghost-watermark) {
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
 
         .ghost-watermark {
@@ -122,7 +175,7 @@
             -webkit-text-stroke: 1.5px rgba(57, 255, 20, 0.06);
             font-size: clamp(80px, 18vw, 180px);
             font-weight: 700;
-            z-index: 0;
+            z-index: 1;
             pointer-events: none;
             user-select: none;
             top: 40px;
@@ -131,15 +184,50 @@
             line-height: 1;
         }
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
+        /* --- Scroll animations --- */
+        @media (prefers-reduced-motion: no-preference) {
+            section {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.6s ease, transform 0.6s ease;
+            }
+            section.active {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            
+            section.active > *:not(.ghost-watermark) {
+                opacity: 0;
+                transform: translateY(20px);
+                animation: fadeUpIn 0.6s ease forwards;
+            }
+            section.active > *:nth-child(1) { animation-delay: 0.1s; }
+            section.active > *:nth-child(2) { animation-delay: 0.2s; }
+            section.active > *:nth-child(3) { animation-delay: 0.3s; }
+            section.active > *:nth-child(4) { animation-delay: 0.4s; }
+            section.active > *:nth-child(5) { animation-delay: 0.5s; }
+            section.active > *:nth-child(6) { animation-delay: 0.6s; }
+
+            /* Skills pills staggered fade & slide in */
+            #skills.active .skills-grid .skill-tag {
+                opacity: 0;
+                transform: translateY(15px);
+                animation: fadeUpIn 0.5s ease forwards;
+            }
+            #skills.active .skills-grid .skill-tag:nth-child(1) { animation-delay: 0.3s; }
+            #skills.active .skills-grid .skill-tag:nth-child(2) { animation-delay: 0.38s; }
+            #skills.active .skills-grid .skill-tag:nth-child(3) { animation-delay: 0.46s; }
+            #skills.active .skills-grid .skill-tag:nth-child(4) { animation-delay: 0.54s; }
+            #skills.active .skills-grid .skill-tag:nth-child(5) { animation-delay: 0.62s; }
+            #skills.active .skills-grid .skill-tag:nth-child(6) { animation-delay: 0.70s; }
+            #skills.active .skills-grid .skill-tag:nth-child(7) { animation-delay: 0.78s; }
         }
 
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+        @keyframes fadeUpIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* --- Hero --- */
@@ -148,16 +236,19 @@
         }
 
         .hero-name {
-            font-size: clamp(3rem, 8vw, 6rem);
-            color: var(--text-main);
+            font-size: 96px;
+            font-weight: 700;
+            color: var(--accent-color);
             margin-bottom: 1rem;
+            font-family: var(--font-mono);
         }
 
         .typewriter {
-            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-size: 18px;
             color: var(--accent-color);
             margin-bottom: 2rem;
             min-height: 1.2em;
+            font-family: var(--font-mono);
         }
 
         .cursor {
@@ -176,10 +267,12 @@
         }
 
         .hero-sub {
-            font-size: 1.1rem;
+            font-size: 18px;
             color: var(--text-dim);
             max-width: 600px;
             margin-bottom: 3rem;
+            font-family: var(--font-sans);
+            line-height: 1.8;
         }
 
         .cta-btn {
@@ -202,6 +295,34 @@
             box-shadow: var(--glow-strong);
         }
 
+        /* --- Scrolling Marquee --- */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+            background: rgba(10, 13, 18, 0.7);
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 12px 0;
+            width: 100%;
+            z-index: 10;
+            position: relative;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 9px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.55);
+            animation: marquee-scroll 35s linear infinite;
+        }
+
+        @keyframes marquee-scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
         /* --- About --- */
         .about-container {
             display: grid;
@@ -211,15 +332,17 @@
         }
 
         .section-title {
-            font-size: 2.5rem;
+            font-size: 52px;
+            font-weight: 700;
             margin-bottom: 2rem;
             color: var(--accent-color);
             text-shadow: var(--glow);
+            font-family: var(--font-mono);
         }
 
         .terminal-card {
-            background: #111;
-            border: 1px solid #333;
+            background: var(--card-bg);
+            border: 1px solid var(--divider-color);
             padding: 1.5rem;
             font-family: var(--font-mono);
             position: relative;
@@ -240,10 +363,15 @@
 
         .terminal-content p {
             margin-bottom: 0.5rem;
-            font-size: 0.9rem;
+            font-size: 13px;
+            font-family: var(--font-mono);
         }
 
-        .terminal-key { color: var(--accent-color); }
+        .terminal-key {
+            color: var(--accent-color);
+            font-family: var(--font-mono);
+            font-size: 13px;
+        }
 
         /* --- Skills --- */
         .skills-grid {
@@ -258,13 +386,13 @@
             border: 1px solid var(--accent-color);
             color: var(--accent-color);
             font-family: var(--font-mono);
-            font-size: 0.9rem;
+            font-size: 13px;
             transition: all 0.3s ease;
         }
 
         .skill-tag:hover {
-            background: var(--accent-color);
-            color: var(--bg-color);
+            background: var(--deep-green);
+            color: var(--accent-color);
             box-shadow: var(--glow);
         }
 
@@ -277,7 +405,7 @@
         }
 
         .project-card {
-            background: #111;
+            background: var(--card-bg);
             padding: 2rem;
             border-left: 4px solid var(--accent-color);
             transition: all 0.4s ease;
@@ -289,19 +417,21 @@
         .project-card:hover {
             transform: translateY(-5px);
             box-shadow: var(--glow);
-            background: #161616;
+            background: var(--deep-green);
         }
 
         .project-title {
             font-size: 1.4rem;
             margin-bottom: 1rem;
-            color: var(--text-main);
+            color: var(--accent-color);
         }
 
         .project-desc {
             color: var(--text-dim);
-            font-size: 0.95rem;
+            font-size: 16px;
             margin-bottom: 1.5rem;
+            font-family: var(--font-sans);
+            line-height: 1.8;
         }
 
         .project-tags {
@@ -313,7 +443,7 @@
 
         .project-tag {
             font-family: var(--font-mono);
-            font-size: 0.75rem;
+            font-size: 13px;
             color: var(--accent-color);
             opacity: 0.8;
         }
@@ -325,7 +455,7 @@
 
         .project-link {
             font-family: var(--font-mono);
-            font-size: 0.85rem;
+            font-size: 13px;
             color: var(--accent-color);
             display: flex;
             align-items: center;
@@ -362,7 +492,8 @@
             bottom: -30px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 0.8rem;
+            font-size: 13px;
+            font-family: var(--font-mono);
             opacity: 0;
             transition: opacity 0.3s;
             white-space: nowrap;
@@ -381,7 +512,7 @@
         .social-icon {
             font-family: var(--font-mono);
             color: var(--text-dim);
-            font-size: 1rem;
+            font-size: 13px;
         }
 
         .social-icon:hover {
@@ -393,10 +524,10 @@
         footer {
             padding: 3rem 2rem;
             text-align: center;
-            border-top: 1px solid #1a1a1a;
-            color: #444;
+            border-top: 1px solid var(--divider-color);
+            color: #1e3a14;
             font-family: var(--font-mono);
-            font-size: 0.9rem;
+            font-size: 13px;
         }
 
         /* --- Mobile Responsiveness --- */
@@ -405,14 +536,19 @@
             .nav-links { display: none; }
             section { padding: 80px 5%; }
             .about-container { grid-template-columns: 1fr; }
-            .hero-name { font-size: 3.5rem; }
+            .hero-name { font-size: 48px; }
+            .section-title { font-size: 36px; }
+            .hero-sub { font-size: 16px; }
+            .typewriter { font-size: 16px; }
         }
     </style>
 </head>
 <body>
+    <div id="scroll-progress"></div>
+    <canvas id="particle-canvas"></canvas>
 
     <nav>
-        <div class="nav-logo">VR_</div>
+        <div class="nav-logo" id="logo"><span class="logo-v">V</span><span class="logo-r">R</span></div>
         <div class="nav-links">
             <a href="#hero">Home</a>
             <a href="#about">About</a>
@@ -429,16 +565,21 @@
             <div class="typewriter mono">
                 <span id="typewriter-text"></span><span class="cursor"></span>
             </div>
-            <p class="hero-sub">2nd Year BTech CSE Student | Currently learning front-end development and building things for the web.</p>
+            <p class="hero-sub">Turning ideas into interfaces.<br>Building things for the web — one project at a time.</p>
             <a href="#projects" class="cta-btn">View My Work</a>
         </section>
 
-        <section id="about" class="reveal">
+        <!-- Scrolling Marquee -->
+        <div class="marquee-container">
+            <div class="marquee-content" id="marquee-content"></div>
+        </div>
+
+        <section id="about">
             <div class="ghost-watermark">ABOUT</div>
             <h2 class="section-title">About Me</h2>
             <div class="about-container">
                 <div class="about-text">
-                    <p>Hey, I'm Vedanth — a Second-year CSE student based in India, currently deep in Front-end web development. I'm building projects, learning by doing, and working toward freelancing.</p>
+                    <p>Hey, I'm Vedanth — a second-year CSE student based in India, currently deep in front-end web development. I'm building projects, learning by doing, and working toward freelancing.</p>
                     <p style="margin-top: 1.5rem;">I focus on writing clean code and creating interfaces that are both functional and visually striking.</p>
                 </div>
                 <div class="terminal-card">
@@ -450,15 +591,15 @@
                     <div class="terminal-content">
                         <p><span class="terminal-key">Name:</span> Vedanth Raja</p>
                         <p><span class="terminal-key">Location:</span> India</p>
-                        <p><span class="terminal-key">Focus:</span> [Front-end, UI/UX]</p>
-                        <p><span class="terminal-key">Status:</span> Available for work</p>
-                        <p><span class="terminal-key">Level:</span> BTech CSE 2nd Year</p>
+                        <p><span class="terminal-key">Focus:</span> Front-end, UI/UX</p>
+                        <p><span class="terminal-key">Status:</span> Currently building · Open to future opportunities</p>
+                        <p><span class="terminal-key">Level:</span> BTech CSE 2nd year</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="skills" class="reveal">
+        <section id="skills">
             <div class="ghost-watermark">SKILLS</div>
             <h2 class="section-title">Technical Skills</h2>
             <div class="skills-grid">
@@ -472,7 +613,7 @@
             </div>
         </section>
 
-        <section id="projects" class="reveal">
+        <section id="projects">
             <div class="ghost-watermark">WORK</div>
             <h2 class="section-title">Selected Projects</h2>
             <div class="projects-grid">
@@ -527,7 +668,7 @@
             </div>
         </section>
 
-        <section id="contact" class="reveal">
+        <section id="contact">
             <div class="ghost-watermark">CONNECT</div>
             <h2 class="section-title">Let's Connect</h2>
             <div class="email-copy" id="email-trigger">
@@ -580,9 +721,26 @@
             setTimeout(type, typeSpeed);
         }
 
-        // --- Scroll Animations ---
+        // --- Scroll Progress Bar ---
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+            document.getElementById('scroll-progress').style.width = scrolled + '%';
+        });
+
+        // --- Logo Smooth Scroll to Top ---
+        document.getElementById('logo').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // --- Scrolling Marquee Content Generation ---
+        const marqueeText = "THINK · DESIGN · BUILD · DELIVER · ALWAYS LEARNING · ";
+        document.getElementById('marquee-content').innerText = marqueeText.repeat(16);
+
+        // --- Scroll Animations (IntersectionObserver) ---
         const observerOptions = {
-            threshold: 0.1
+            threshold: 0.15
         };
 
         const observer = new IntersectionObserver((entries) => {
@@ -593,7 +751,68 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        document.querySelectorAll('section').forEach(el => observer.observe(el));
+
+        // --- Particle Background ---
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        const particles = [];
+        const numParticles = 22;
+
+        for (let i = 0; i < numParticles; i++) {
+            const pRadius = 0.4 + Math.random() * 0.9; // 0.4 to 1.3px
+            const baseOpacity = 0.06 + Math.random() * 0.18; // 0.06 to 0.24
+            particles.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                radius: pRadius,
+                baseOpacity: baseOpacity,
+                opacity: baseOpacity,
+                pulseSpeed: 0.01 + Math.random() * 0.02,
+                pulseTime: Math.random() * Math.PI * 2,
+                dx: (Math.random() - 0.5) * 0.2, // slight horizontal drift
+                dy: -0.1 - Math.random() * 0.2 // slowly upward
+            });
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, width, height);
+            
+            for (let i = 0; i < numParticles; i++) {
+                const p = particles[i];
+                
+                p.x += p.dx;
+                p.y += p.dy;
+                
+                // wrap around edges seamlessly
+                if (p.x < 0) p.x = width;
+                if (p.x > width) p.x = 0;
+                if (p.y < 0) p.y = height;
+                if (p.y > height) p.y = 0;
+                
+                p.pulseTime += p.pulseSpeed;
+                p.opacity = p.baseOpacity + Math.sin(p.pulseTime) * 0.04;
+                // clamp opacity between 0.06 and 0.24
+                if (p.opacity < 0.06) p.opacity = 0.06;
+                if (p.opacity > 0.24) p.opacity = 0.24;
+                
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
+                ctx.fill();
+            }
+            
+            requestAnimationFrame(animateParticles);
+        }
 
         // --- Copy Email ---
         const emailTrigger = document.getElementById('email-trigger');
@@ -609,8 +828,11 @@
             });
         });
 
-        // Initialize typewriter
-        window.onload = type;
+        // Initialize typewriter and particles
+        window.onload = () => {
+            type();
+            animateParticles();
+        };
     </script>
 </body>
 </html>
