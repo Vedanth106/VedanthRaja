@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #060d1a;
+            --bg-color: #080b16;
             --accent-color: #39FF14;
             --text-main: #39FF14;
             --text-dim: #a0a0a0;
@@ -88,7 +88,7 @@
             top: 0;
             width: 100%;
             z-index: 1000;
-            background: #060d1a;
+            background: rgba(8, 11, 22, 0.95);
             border-bottom: 1px solid var(--divider-color);
             padding: 1.5rem 2rem;
             display: flex;
@@ -155,7 +155,7 @@
 
         /* --- Layout --- */
         section {
-            background-color: #060d1a;
+            background-color: transparent;
             padding: 100px 10%;
             min-height: 100vh;
             display: flex;
@@ -265,7 +265,7 @@
         .marquee-container {
             overflow: hidden;
             white-space: nowrap;
-            background: #060d1a;
+            background: #080b16;
             border-top: 1px solid rgba(255, 255, 255, 0.04);
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
             padding: 12px 0;
@@ -500,7 +500,7 @@
 
         /* --- Footer --- */
         footer {
-            background-color: #060d1a;
+            background-color: transparent;
             padding: 3rem 2rem;
             text-align: center;
             border-top: 1px solid var(--divider-color);
@@ -807,11 +807,9 @@
             });
         });
 
-        // Initialize typewriter and particles
-        window.onload = () => {
-            type();
-            animateParticles();
-        };
+        // Initialize typewriter and particles immediately
+        type();
+        animateParticles();
     </script>
 </body>
 </html>
