@@ -8,6 +8,6 @@
     </defs>
     <g transform="translate(32, 32) rotate(45)">
         <rect x="-16.32" y="-16.32" width="32.64" height="32.64" fill="url(#favGrad)" />
-        <rect x="-10" y="-10" width="20" height="20" rx="2.5" fill="#07090f" />
+        <rect x="-10" y="-10" width="20" height="20" rx="4" fill="#07090f" />
     </g>
 </svg>

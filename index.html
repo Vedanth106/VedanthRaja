@@ -116,6 +116,7 @@
             justify-content: center;
             cursor: pointer;
             user-select: none;
+            transition: color 0.15s ease;
         }
 
         .logo-name {
@@ -137,7 +138,7 @@
             position: absolute;
             background: rgba(85, 80, 204, 0.1);
             border: 1px solid rgba(85, 80, 204, 0.2);
-            border-radius: 2rem;
+            border-radius: 6px;
             pointer-events: none;
             z-index: -1;
             opacity: 0;
@@ -547,8 +548,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            padding-bottom: 12px;
             margin-bottom: 16px;
         }
 
@@ -594,38 +593,24 @@
             font-size: clamp(1.5rem, 3.5vw, 2.25rem);
         }
 
-        .skills-tiers-container {
+        .skills-legend {
             display: flex;
-            flex-direction: column;
-            gap: 2.5rem;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            align-items: center;
+            margin-bottom: 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
         }
 
-        .skills-tier {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .tier-info {
+        .legend-item {
             display: flex;
             align-items: center;
             gap: 8px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            font-weight: 500;
         }
 
-        .tier-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-        }
-
-        .tier-dot.proficient { background-color: var(--accent-violet-light); }
-        .tier-dot.growing { background-color: var(--accent-cyan); }
-        .tier-dot.learning { background-color: var(--accent-purple); }
-
-        .skills-pills {
+        .skills-wrap-pills {
             display: flex;
             flex-wrap: wrap;
             gap: 0.75rem;
@@ -665,7 +650,11 @@
 
         /* --- Work Section --- */
         .work-heading {
+            font-family: 'Sora', sans-serif;
+            font-weight: 700;
             font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+            letter-spacing: -0.02em;
+            margin-bottom: 3rem;
         }
 
         .projects-grid {
@@ -678,11 +667,11 @@
             background: rgba(13, 17, 32, 0.8);
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 1rem;
-            padding: 2.25rem;
+            padding: 1.5rem;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            min-height: 320px;
+            justify-content: flex-start;
+            min-height: 480px;
             transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
         }
 
@@ -693,23 +682,70 @@
             box-shadow: 0 12px 30px rgba(var(--card-accent-rgb), 0.13);
         }
 
-        .project-card-header {
+        /* Visual Preview Zone */
+        .project-preview-zone {
+            width: 100%;
+            height: 160px;
+            background: #090c15;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .project-preview-blob {
+            position: absolute;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--card-accent) 0%, transparent 70%);
+            opacity: 0.20;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+
+        .project-card:hover .project-preview-blob {
+            transform: translate(-50%, -50%) scale(1.15);
+            opacity: 0.25;
+        }
+
+        .project-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
         }
 
-        .project-number {
+        .project-number-pill {
             font-family: 'JetBrains Mono', monospace;
             font-weight: 500;
             font-size: 0.75rem;
             color: var(--card-accent);
+            background: rgba(var(--card-accent-rgb), 0.1);
+            border: 1px solid rgba(var(--card-accent-rgb), 0.2);
+            padding: 4px 10px;
+            border-radius: 2rem;
         }
 
-        .project-arrow-wrap {
-            display: inline-block;
+        .project-arrow-btn {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: var(--card-accent);
+            transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .project-arrow-btn:hover {
+            background: rgba(var(--card-accent-rgb), 0.15);
+            border-color: rgba(var(--card-accent-rgb), 0.35);
         }
 
         .project-arrow {
@@ -740,20 +776,14 @@
             font-size: 0.875rem;
             line-height: 1.625;
             color: var(--text-muted);
-            margin-bottom: 2rem;
-        }
-
-        .project-card-footer {
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-            margin-top: auto;
+            margin-bottom: 1.5rem;
         }
 
         .project-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
+            margin-top: auto;
         }
 
         .project-tag {
@@ -765,25 +795,6 @@
             border: 1px solid rgba(255, 255, 255, 0.06);
             padding: 4px 10px;
             border-radius: 2rem;
-        }
-
-        .project-links {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .project-link {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: color 0.2s ease;
-        }
-
-        .project-link:hover {
-            color: var(--text-main);
         }
 
         /* --- Contact Section --- */
@@ -928,12 +939,6 @@
             color: var(--text-muted);
         }
 
-        .footer-center {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
         /* --- Mobile Responsiveness --- */
         @media (max-width: 768px) {
             nav { padding: 1rem 5%; }
@@ -981,7 +986,7 @@
             <div class="hero-content">
                 <div class="availability-badge reveal-el content">
                     <span class="pulse-dot"></span>
-                    <span class="badge-text">cse student, building for the web</span>
+                    <span class="badge-text">code · learn · repeat</span>
                 </div>
                 <h1 class="hero-name reveal-el heading">
                     <span class="first-name">Vedanth</span> <span class="last-name">Raja</span>
@@ -1011,26 +1016,6 @@
             </div>
         </section>
 
-        <!-- Scrolling Marquee Strip 1 -->
-        <div class="marquee-container">
-            <div class="marquee-track" style="animation-duration: 28s;">
-                <div class="marquee-list">
-                    <span>THINK</span><span class="marquee-dot"></span>
-                    <span>DESIGN</span><span class="marquee-dot"></span>
-                    <span>BUILD</span><span class="marquee-dot"></span>
-                    <span>DELIVER</span><span class="marquee-dot"></span>
-                    <span>ALWAYS LEARNING</span><span class="marquee-dot"></span>
-                </div>
-                <div class="marquee-list">
-                    <span>THINK</span><span class="marquee-dot"></span>
-                    <span>DESIGN</span><span class="marquee-dot"></span>
-                    <span>BUILD</span><span class="marquee-dot"></span>
-                    <span>DELIVER</span><span class="marquee-dot"></span>
-                    <span>ALWAYS LEARNING</span><span class="marquee-dot"></span>
-                </div>
-            </div>
-        </div>
-
         <section id="about">
             <span class="section-label reveal-el label">// About</span>
             <h2 class="section-heading reveal-el heading">About Me</h2>
@@ -1051,19 +1036,19 @@
                         </div>
                         <div class="terminal-body">
                             <div class="terminal-row">
-                                <span class="t-key">name</span> <span class="t-punc">:</span> <span class="t-val">Vedanth Raja</span>
+                                <span class="t-key">Name</span> <span class="t-punc">:</span> <span class="t-val">Vedanth Raja</span>
                             </div>
                             <div class="terminal-row">
-                                <span class="t-key">location</span> <span class="t-punc">:</span> <span class="t-val">India</span>
+                                <span class="t-key">Location</span> <span class="t-punc">:</span> <span class="t-val">India</span>
                             </div>
                             <div class="terminal-row">
-                                <span class="t-key">focus</span> <span class="t-punc">:</span> <span class="t-val">Front-end</span> <span class="t-punc">·</span> <span class="t-val">UI/UX</span>
+                                <span class="t-key">Focus</span> <span class="t-punc">:</span> <span class="t-val">Front-end</span> <span class="t-punc">·</span> <span class="t-val">UI/UX</span>
                             </div>
                             <div class="terminal-row">
-                                <span class="t-key">status</span> <span class="t-punc">:</span> <span class="t-val">Currently building</span> <span class="t-punc">·</span> <span class="t-val">Open to future opportunities</span>
+                                <span class="t-key">Status</span> <span class="t-punc">:</span> <span class="t-val">Currently building</span> <span class="t-punc">·</span> <span class="t-val">Open to future opportunities</span>
                             </div>
                             <div class="terminal-row">
-                                <span class="t-key">level</span> <span class="t-punc">:</span> <span class="t-val">BTech CSE 2nd year</span>
+                                <span class="t-key">Level</span> <span class="t-punc">:</span> <span class="t-val">BTech CSE 2nd year</span>
                             </div>
                         </div>
                     </div>
@@ -1075,76 +1060,69 @@
             <span class="section-label reveal-el label">// Skills</span>
             <h2 class="section-heading reveal-el heading skills-heading">My Tech Stack</h2>
             
-            <div class="skills-tiers-container reveal-el content">
-                <!-- Proficient -->
-                <div class="skills-tier">
-                    <div class="tier-info">
-                        <span class="tier-dot proficient"></span>
-                        <span class="tier-name">Proficient</span>
-                    </div>
-                    <div class="skills-pills">
-                        <div class="magnetic-wrap" data-mag-range="50" data-mag-strength="0.18">
-                            <span class="skill-tag tag-proficient">HTML5</span>
-                        </div>
-                        <div class="magnetic-wrap" data-mag-range="50" data-mag-strength="0.18">
-                            <span class="skill-tag tag-proficient">CSS3</span>
-                        </div>
-                    </div>
+            <!-- Horizontal Legend Row at Top -->
+            <div class="skills-legend reveal-el content">
+                <div class="legend-item">
+                    <span class="tier-dot proficient"></span>
+                    <span>Proficient</span>
+                </div>
+                <div class="legend-item">
+                    <span class="tier-dot growing"></span>
+                    <span>Growing</span>
+                </div>
+                <div class="legend-item">
+                    <span class="tier-dot learning"></span>
+                    <span>Learning</span>
+                </div>
+            </div>
+
+            <!-- Single Wrapping Row of Pills -->
+            <div class="skills-wrap-pills reveal-el content">
+                <!-- Proficient Pills -->
+                <div class="magnetic-wrap" data-mag-range="50" data-mag-strength="0.18">
+                    <span class="skill-tag tag-proficient">HTML5</span>
+                </div>
+                <div class="magnetic-wrap" data-mag-range="50" data-mag-strength="0.18">
+                    <span class="skill-tag tag-proficient">CSS3</span>
                 </div>
 
-                <!-- Growing -->
-                <div class="skills-tier">
-                    <div class="tier-info">
-                        <span class="tier-dot growing"></span>
-                        <span class="tier-name">Growing</span>
-                    </div>
-                    <div class="skills-pills">
-                        <div class="magnetic-wrap" data-mag-range="50" data-mag-strength="0.18">
-                            <span class="skill-tag tag-growing">JavaScript</span>
-                        </div>
-                        <div class="magnetic-wrap" data-mag-range="50" data-mag-strength="0.18">
-                            <span class="skill-tag tag-growing">Git & GitHub</span>
-                        </div>
-                        <div class="magnetic-wrap" data-mag-range="50" data-mag-strength="0.18">
-                            <span class="skill-tag tag-growing">Responsive Design</span>
-                        </div>
-                        <div class="magnetic-wrap" data-mag-range="50" data-mag-strength="0.18">
-                            <span class="skill-tag tag-growing">UI/UX Design</span>
-                        </div>
-                    </div>
+                <!-- Growing Pills -->
+                <div class="magnetic-wrap" data-mag-range="50" data-mag-strength="0.18">
+                    <span class="skill-tag tag-growing">JavaScript</span>
+                </div>
+                <div class="magnetic-wrap" data-mag-range="50" data-mag-strength="0.18">
+                    <span class="skill-tag tag-growing">Git & GitHub</span>
+                </div>
+                <div class="magnetic-wrap" data-mag-range="50" data-mag-strength="0.18">
+                    <span class="skill-tag tag-growing">Responsive Design</span>
+                </div>
+                <div class="magnetic-wrap" data-mag-range="50" data-mag-strength="0.18">
+                    <span class="skill-tag tag-growing">UI/UX Design</span>
                 </div>
 
-                <!-- Learning -->
-                <div class="skills-tier">
-                    <div class="tier-info">
-                        <span class="tier-dot learning"></span>
-                        <span class="tier-name">Learning</span>
-                    </div>
-                    <div class="skills-pills">
-                        <div class="magnetic-wrap" data-mag-range="50" data-mag-strength="0.18">
-                            <span class="skill-tag tag-learning">React</span>
-                        </div>
-                        <div class="magnetic-wrap" data-mag-range="50" data-mag-strength="0.18">
-                            <span class="skill-tag tag-learning">TypeScript</span>
-                        </div>
-                        <div class="magnetic-wrap" data-mag-range="50" data-mag-strength="0.18">
-                            <span class="skill-tag tag-learning">Tailwind CSS</span>
-                        </div>
-                        <div class="magnetic-wrap" data-mag-range="50" data-mag-strength="0.18">
-                            <span class="skill-tag tag-learning">Figma</span>
-                        </div>
-                        <div class="magnetic-wrap" data-mag-range="50" data-mag-strength="0.18">
-                            <span class="skill-tag tag-learning">Vite</span>
-                        </div>
-                        <div class="magnetic-wrap" data-mag-range="50" data-mag-strength="0.18">
-                            <span class="skill-tag tag-learning">Node.js</span>
-                        </div>
-                    </div>
+                <!-- Learning Pills -->
+                <div class="magnetic-wrap" data-mag-range="50" data-mag-strength="0.18">
+                    <span class="skill-tag tag-learning">React</span>
+                </div>
+                <div class="magnetic-wrap" data-mag-range="50" data-mag-strength="0.18">
+                    <span class="skill-tag tag-learning">TypeScript</span>
+                </div>
+                <div class="magnetic-wrap" data-mag-range="50" data-mag-strength="0.18">
+                    <span class="skill-tag tag-learning">Tailwind CSS</span>
+                </div>
+                <div class="magnetic-wrap" data-mag-range="50" data-mag-strength="0.18">
+                    <span class="skill-tag tag-learning">Figma</span>
+                </div>
+                <div class="magnetic-wrap" data-mag-range="50" data-mag-strength="0.18">
+                    <span class="skill-tag tag-learning">Vite</span>
+                </div>
+                <div class="magnetic-wrap" data-mag-range="50" data-mag-strength="0.18">
+                    <span class="skill-tag tag-learning">Node.js</span>
                 </div>
             </div>
         </section>
 
-        <!-- Scrolling Ticker 2 (Currently Learning) -->
+        <!-- Scrolling Ticker (Currently Learning) -->
         <div class="marquee-container">
             <div class="marquee-track" style="animation-duration: 16s;">
                 <div class="marquee-list">
@@ -1177,112 +1155,78 @@
         </div>
 
         <section id="projects">
-            <span class="section-label reveal-el label">// Work</span>
-            <h2 class="section-heading reveal-el heading work-heading">Featured projects</h2>
+            <h2 class="work-heading reveal-el heading">Featured projects</h2>
             <div class="projects-grid">
                 <!-- Project 1 -->
                 <div class="project-card reveal-el content" style="--card-accent: #5550cc; --card-accent-rgb: 85, 80, 204;">
-                    <div class="project-card-header">
-                        <span class="project-number">01</span>
-                        <div class="magnetic-wrap" data-mag-range="40" data-mag-strength="0.18">
-                            <span class="project-arrow-wrap">
-                                <svg class="project-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <div class="project-preview-zone">
+                        <div class="project-preview-blob"></div>
+                    </div>
+                    <div class="project-header">
+                        <span class="project-number-pill">01</span>
+                        <div class="magnetic-wrap" data-mag-range="60" data-mag-strength="0.22">
+                            <a href="https://github.com/Vedanth106" target="_blank" class="project-arrow-btn">
+                                <svg class="project-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                     <line x1="5" y1="12" x2="19" y2="12"></line>
                                     <polyline points="12 5 19 12 12 19"></polyline>
                                 </svg>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="project-card-body">
-                        <h3 class="project-title">Neural Landing Page</h3>
-                        <p class="project-desc">Animated glassmorphic UI featuring layered blur surfaces, GPU-accelerated motion, and a neural-net-inspired visual system.</p>
-                    </div>
-                    <div class="project-card-footer">
-                        <div class="project-tags">
-                            <span class="project-tag">HTML</span>
-                            <span class="project-tag">CSS</span>
-                            <span class="project-tag">JavaScript</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/Vedanth106" target="_blank" class="project-link">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                                GitHub
-                            </a>
-                            <a href="#" class="project-link">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                                Live Demo
                             </a>
                         </div>
+                    </div>
+                    <h3 class="project-title">Neural Landing Page</h3>
+                    <p class="project-desc">Animated glassmorphic UI featuring layered blur surfaces, GPU-accelerated motion, and a neural-net-inspired visual system.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">HTML</span>
+                        <span class="project-tag">CSS</span>
+                        <span class="project-tag">JavaScript</span>
                     </div>
                 </div>
 
                 <!-- Project 2 -->
                 <div class="project-card reveal-el content" style="--card-accent: #3d8fa8; --card-accent-rgb: 61, 143, 168;">
-                    <div class="project-card-header">
-                        <span class="project-number">02</span>
-                        <div class="magnetic-wrap" data-mag-range="40" data-mag-strength="0.18">
-                            <span class="project-arrow-wrap">
-                                <svg class="project-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <div class="project-preview-zone">
+                        <div class="project-preview-blob"></div>
+                    </div>
+                    <div class="project-header">
+                        <span class="project-number-pill">02</span>
+                        <div class="magnetic-wrap" data-mag-range="60" data-mag-strength="0.22">
+                            <a href="https://github.com/Vedanth106" target="_blank" class="project-arrow-btn">
+                                <svg class="project-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                     <line x1="5" y1="12" x2="19" y2="12"></line>
                                     <polyline points="12 5 19 12 12 19"></polyline>
                                 </svg>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="project-card-body">
-                        <h3 class="project-title">Dev Terminal</h3>
-                        <p class="project-desc">A fully functional CLI emulator running in the browser — custom shell parser, command history, and ANSI-style color output.</p>
-                    </div>
-                    <div class="project-card-footer">
-                        <div class="project-tags">
-                            <span class="project-tag">JavaScript</span>
-                            <span class="project-tag">Monospace UI</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/Vedanth106" target="_blank" class="project-link">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                                GitHub
-                            </a>
-                            <a href="#" class="project-link">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                                Live Demo
                             </a>
                         </div>
+                    </div>
+                    <h3 class="project-title">Dev Terminal</h3>
+                    <p class="project-desc">A fully functional CLI emulator running in the browser — custom shell parser, command history, and ANSI-style color output.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">JavaScript</span>
+                        <span class="project-tag">Monospace UI</span>
                     </div>
                 </div>
 
                 <!-- Project 3 -->
                 <div class="project-card reveal-el content" style="--card-accent: #7a6eaa; --card-accent-rgb: 122, 110, 170;">
-                    <div class="project-card-header">
-                        <span class="project-number">03</span>
-                        <div class="magnetic-wrap" data-mag-range="40" data-mag-strength="0.18">
-                            <span class="project-arrow-wrap">
-                                <svg class="project-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <div class="project-preview-zone">
+                        <div class="project-preview-blob"></div>
+                    </div>
+                    <div class="project-header">
+                        <span class="project-number-pill">03</span>
+                        <div class="magnetic-wrap" data-mag-range="60" data-mag-strength="0.22">
+                            <a href="https://github.com/Vedanth106" target="_blank" class="project-arrow-btn">
+                                <svg class="project-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                     <line x1="5" y1="12" x2="19" y2="12"></line>
                                     <polyline points="12 5 19 12 12 19"></polyline>
                                 </svg>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="project-card-body">
-                        <h3 class="project-title">Vault Interface</h3>
-                        <p class="project-desc">Minimalist dashboard concept for a SaaS product — high-contrast data layouts, micro-interaction states, keyboard-first navigation.</p>
-                    </div>
-                    <div class="project-card-footer">
-                        <div class="project-tags">
-                            <span class="project-tag">Frontend</span>
-                            <span class="project-tag">SaaS</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/Vedanth106" target="_blank" class="project-link">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                                GitHub
-                            </a>
-                            <a href="#" class="project-link">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                                Live Demo
                             </a>
                         </div>
+                    </div>
+                    <h3 class="project-title">Vault Interface</h3>
+                    <p class="project-desc">Minimalist dashboard concept for a SaaS product — high-contrast data layouts, micro-interaction states, keyboard-first navigation.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Frontend</span>
+                        <span class="project-tag">SaaS</span>
                     </div>
                 </div>
             </div>
@@ -1342,14 +1286,7 @@
 
     <footer>
         <div class="footer-left">© 2026 Vedanth Raja</div>
-        <div class="footer-center">
-            <div class="magnetic-wrap" data-mag-range="50" data-mag-strength="0.2">
-                <div class="logo-mark" id="footer-logo">
-                    <span id="footer-logo-text">VR</span>
-                </div>
-            </div>
-        </div>
-        <div class="footer-right">made with intent · learning everyday</div>
+        <div class="footer-right">Made with Intent · Learning Everyday</div>
     </footer>
 
     <script>
@@ -1523,9 +1460,40 @@
             }
         });
 
-        // --- Logo Smooth Scroll to Top ---
-        document.getElementById('nav-logo').addEventListener('click', () => {
+        // --- Nav Logo Scramble Glitch Easter Egg & Scroll to Top ---
+        const navLogo = document.getElementById('nav-logo');
+        const scrambleChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%";
+        let navScrambleInterval = null;
+
+        navLogo.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (navScrambleInterval) return;
+
+            let frame = 0;
+            navLogo.style.color = '#a0f0ff';
+
+            navScrambleInterval = setInterval(() => {
+                frame++;
+                let char1 = '';
+                let char2 = '';
+
+                if (frame < 10) {
+                    char1 = scrambleChars.charAt(Math.floor(Math.random() * scrambleChars.length));
+                    char2 = scrambleChars.charAt(Math.floor(Math.random() * scrambleChars.length));
+                } else if (frame < 18) {
+                    char1 = 'V';
+                    char2 = scrambleChars.charAt(Math.floor(Math.random() * scrambleChars.length));
+                } else {
+                    char1 = 'V';
+                    char2 = 'R';
+                    navLogo.style.color = '#ffffff';
+                    clearInterval(navScrambleInterval);
+                    navScrambleInterval = null;
+                }
+
+                navLogo.textContent = char1 + char2;
+            }, 45);
         });
 
         // --- Scroll Reveal Staggered Animations ---
@@ -1568,42 +1536,6 @@
                     copyStatusText.textContent = "Click to copy";
                 }, 2000);
             });
-        });
-
-        // --- VR Scramble Easter Egg (Footer) ---
-        const footerLogo = document.getElementById('footer-logo');
-        const footerTextEl = document.getElementById('footer-logo-text');
-        const scrambleChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%";
-
-        let scrambleInterval = null;
-
-        footerLogo.addEventListener('click', () => {
-            if (scrambleInterval) return;
-
-            let frame = 0;
-            footerTextEl.style.color = '#a0f0ff';
-
-            scrambleInterval = setInterval(() => {
-                frame++;
-                let char1 = '';
-                let char2 = '';
-
-                if (frame < 10) {
-                    char1 = scrambleChars.charAt(Math.floor(Math.random() * scrambleChars.length));
-                    char2 = scrambleChars.charAt(Math.floor(Math.random() * scrambleChars.length));
-                } else if (frame < 18) {
-                    char1 = 'V';
-                    char2 = scrambleChars.charAt(Math.floor(Math.random() * scrambleChars.length));
-                } else {
-                    char1 = 'V';
-                    char2 = 'R';
-                    footerTextEl.style.color = '#ffffff';
-                    clearInterval(scrambleInterval);
-                    scrambleInterval = null;
-                }
-
-                footerTextEl.textContent = char1 + char2;
-            }, 45);
         });
     </script>
 </body>
