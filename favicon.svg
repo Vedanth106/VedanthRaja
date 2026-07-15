@@ -1,14 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+    <rect width="64" height="64" rx="14.7" fill="#07090f" />
     <defs>
-        <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#FCD34D"/>
-            <stop offset="50%" stop-color="#D97706"/>
-            <stop offset="100%" stop-color="#2D1000"/>
+        <linearGradient id="favGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#7b76cc" />
+            <stop offset="100%" stop-color="#3d8fa8" />
         </linearGradient>
     </defs>
-    <rect width="64" height="64" rx="10" fill="url(#bgGrad)"/>
-    <polygon points="4,4 32,40 4,40" fill="#080808"/>
-    <polygon points="60,4 32,40 60,40" fill="#080808"/>
-    <rect x="4" y="40" width="56" height="20" fill="#080808"/>
-    <rect x="4" y="52" width="56" height="8" fill="url(#bgGrad)"/>
+    <g transform="translate(32, 32) rotate(45)">
+        <rect x="-16.32" y="-16.32" width="32.64" height="32.64" fill="url(#favGrad)" />
+        <rect x="-10" y="-10" width="20" height="20" rx="2.5" fill="#07090f" />
+    </g>
 </svg>
