@@ -763,8 +763,8 @@
             color: var(--card-accent);
             background: rgba(var(--card-accent-rgb), 0.1);
             border: 1px solid rgba(var(--card-accent-rgb), 0.2);
-            padding: 4px 10px;
-            border-radius: 2rem;
+            padding: 2px 8px;
+            border-radius: 4px;
             position: absolute;
             top: 2.25rem;
             left: 2.25rem;
@@ -779,28 +779,28 @@
         }
 
         .project-arrow-btn {
-            width: 34px;
-            height: 34px;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.03);
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.06);
             border: 1px solid rgba(255, 255, 255, 0.08);
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 6px;
             color: var(--card-accent);
             transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
         }
 
         .project-arrow-btn:hover {
-            background: rgba(var(--card-accent-rgb), 0.15);
-            border-color: rgba(var(--card-accent-rgb), 0.35);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.18);
         }
 
         .project-arrow {
             transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        .project-card:hover .project-arrow {
+        .project-card:hover .project-arrow,
+        .project-arrow-btn:hover .project-arrow {
             transform: rotate(-45deg);
         }
 
