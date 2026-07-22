@@ -200,6 +200,17 @@
             margin-bottom: 3rem;
         }
 
+        .section-heading .heading-base {
+            color: #e8eeff;
+        }
+
+        .section-heading .heading-gradient {
+            background: linear-gradient(135deg, #7b76cc, #3d8fa8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
         /* --- Scroll Reveal Animations --- */
         .reveal-el {
             opacity: 0;
@@ -546,8 +557,9 @@
 
         .terminal-header {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
+            gap: 12px;
             margin-bottom: 16px;
         }
 
@@ -569,7 +581,7 @@
         .terminal-title {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.75rem;
-            color: var(--text-muted);
+            color: #7b849e;
         }
 
         .terminal-body {
@@ -589,6 +601,10 @@
         .t-val { color: var(--accent-violet-light); }
 
         /* --- Skills Section --- */
+        #skills {
+            min-height: auto;
+        }
+
         .skills-heading {
             font-size: clamp(1.5rem, 3.5vw, 2.25rem);
         }
@@ -608,6 +624,25 @@
             display: flex;
             align-items: center;
             gap: 8px;
+        }
+
+        .tier-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .tier-dot.proficient {
+            background-color: #7b76cc;
+        }
+
+        .tier-dot.growing {
+            background-color: #3d8fa8;
+        }
+
+        .tier-dot.learning {
+            background-color: #7a6eaa;
         }
 
         .skills-wrap-pills {
@@ -672,6 +707,7 @@
             flex-direction: column;
             justify-content: flex-start;
             min-height: 480px;
+            position: relative;
             transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
         }
 
@@ -685,7 +721,8 @@
         /* Visual Preview Zone */
         .project-preview-zone {
             width: 100%;
-            height: 160px;
+            min-height: 160px;
+            height: auto;
             background: #090c15;
             position: relative;
             overflow: hidden;
@@ -728,6 +765,17 @@
             border: 1px solid rgba(var(--card-accent-rgb), 0.2);
             padding: 4px 10px;
             border-radius: 2rem;
+            position: absolute;
+            top: 2.25rem;
+            left: 2.25rem;
+            z-index: 5;
+        }
+
+        .project-arrow-wrap-absolute {
+            position: absolute;
+            top: 2.25rem;
+            right: 2.25rem;
+            z-index: 5;
         }
 
         .project-arrow-btn {
@@ -809,6 +857,15 @@
             background: linear-gradient(135deg, var(--accent-violet-light), var(--accent-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        .contact-desc {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 0.875rem;
+            line-height: 1.625;
+            color: #7b849e;
+            margin-top: 1.25rem;
         }
 
         .contact-cards {
@@ -1018,11 +1075,12 @@
 
         <section id="about">
             <span class="section-label reveal-el label">// About</span>
-            <h2 class="section-heading reveal-el heading">About Me</h2>
+            <h2 class="section-heading reveal-el heading"><span class="heading-base">About</span> <span class="heading-gradient">Me</span></h2>
             <div class="about-grid">
                 <div class="about-text reveal-el content">
-                    <p>Hey, I'm Vedanth — a second-year CSE student based in India, currently deep in front-end web development. I'm building projects, learning by doing, and working toward freelancing.</p>
-                    <p>I focus on writing clean code and creating interfaces that are both functional and visually striking.</p>
+                    <p>Hey, I'm Vedanth — a second-year AIML student based in India who builds things for the web, with an eye for interfaces that are clean, intentional, and worth interacting with.</p>
+                    <p>I care about the intersection of design and code — where structure meets aesthetics and function meets feel. Whether it's a layout decision or a micro-interaction, the details matter to me.</p>
+                    <p>I approach every project as a chance to think clearly, build deliberately, and raise the standard of what I put out.</p>
                 </div>
                 <div class="reveal-el content">
                     <div class="terminal-card">
@@ -1048,7 +1106,7 @@
                                 <span class="t-key">Status</span> <span class="t-punc">:</span> <span class="t-val">Currently building</span> <span class="t-punc">·</span> <span class="t-val">Open to future opportunities</span>
                             </div>
                             <div class="terminal-row">
-                                <span class="t-key">Level</span> <span class="t-punc">:</span> <span class="t-val">BTech CSE 2nd year</span>
+                                <span class="t-key">Level</span> <span class="t-punc">:</span> <span class="t-val">BTech AIML 2nd Year</span>
                             </div>
                         </div>
                     </div>
@@ -1058,7 +1116,7 @@
 
         <section id="skills">
             <span class="section-label reveal-el label">// Skills</span>
-            <h2 class="section-heading reveal-el heading skills-heading">My Tech Stack</h2>
+            <h2 class="section-heading reveal-el heading skills-heading"><span class="heading-base">My</span> <span class="heading-gradient">Tech Stack</span></h2>
             
             <!-- Horizontal Legend Row at Top -->
             <div class="skills-legend reveal-el content">
@@ -1159,11 +1217,8 @@
             <div class="projects-grid">
                 <!-- Project 1 -->
                 <div class="project-card reveal-el content" style="--card-accent: #5550cc; --card-accent-rgb: 85, 80, 204;">
-                    <div class="project-preview-zone">
-                        <div class="project-preview-blob"></div>
-                    </div>
-                    <div class="project-header">
-                        <span class="project-number-pill">01</span>
+                    <span class="project-number-pill">01</span>
+                    <div class="project-arrow-wrap-absolute">
                         <div class="magnetic-wrap" data-mag-range="60" data-mag-strength="0.22">
                             <a href="https://github.com/Vedanth106" target="_blank" class="project-arrow-btn">
                                 <svg class="project-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1172,6 +1227,9 @@
                                 </svg>
                             </a>
                         </div>
+                    </div>
+                    <div class="project-preview-zone">
+                        <div class="project-preview-blob"></div>
                     </div>
                     <h3 class="project-title">Neural Landing Page</h3>
                     <p class="project-desc">Animated glassmorphic UI featuring layered blur surfaces, GPU-accelerated motion, and a neural-net-inspired visual system.</p>
@@ -1184,11 +1242,8 @@
 
                 <!-- Project 2 -->
                 <div class="project-card reveal-el content" style="--card-accent: #3d8fa8; --card-accent-rgb: 61, 143, 168;">
-                    <div class="project-preview-zone">
-                        <div class="project-preview-blob"></div>
-                    </div>
-                    <div class="project-header">
-                        <span class="project-number-pill">02</span>
+                    <span class="project-number-pill">02</span>
+                    <div class="project-arrow-wrap-absolute">
                         <div class="magnetic-wrap" data-mag-range="60" data-mag-strength="0.22">
                             <a href="https://github.com/Vedanth106" target="_blank" class="project-arrow-btn">
                                 <svg class="project-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1197,6 +1252,9 @@
                                 </svg>
                             </a>
                         </div>
+                    </div>
+                    <div class="project-preview-zone">
+                        <div class="project-preview-blob"></div>
                     </div>
                     <h3 class="project-title">Dev Terminal</h3>
                     <p class="project-desc">A fully functional CLI emulator running in the browser — custom shell parser, command history, and ANSI-style color output.</p>
@@ -1208,11 +1266,8 @@
 
                 <!-- Project 3 -->
                 <div class="project-card reveal-el content" style="--card-accent: #7a6eaa; --card-accent-rgb: 122, 110, 170;">
-                    <div class="project-preview-zone">
-                        <div class="project-preview-blob"></div>
-                    </div>
-                    <div class="project-header">
-                        <span class="project-number-pill">03</span>
+                    <span class="project-number-pill">03</span>
+                    <div class="project-arrow-wrap-absolute">
                         <div class="magnetic-wrap" data-mag-range="60" data-mag-strength="0.22">
                             <a href="https://github.com/Vedanth106" target="_blank" class="project-arrow-btn">
                                 <svg class="project-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1221,6 +1276,9 @@
                                 </svg>
                             </a>
                         </div>
+                    </div>
+                    <div class="project-preview-zone">
+                        <div class="project-preview-blob"></div>
                     </div>
                     <h3 class="project-title">Vault Interface</h3>
                     <p class="project-desc">Minimalist dashboard concept for a SaaS product — high-contrast data layouts, micro-interaction states, keyboard-first navigation.</p>
@@ -1237,6 +1295,7 @@
             <div class="contact-grid">
                 <div class="contact-heading reveal-el heading">
                     <h2 class="section-heading">Let's build <span class="gradient-text">something together.</span></h2>
+                    <p class="contact-desc">I'm always open to new projects, collaborations, or just a good conversation about design and code. Drop me a message.</p>
                 </div>
                 <div class="contact-cards reveal-el content">
                     <!-- Email Card -->
