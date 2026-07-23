@@ -9,15 +9,17 @@ A premium, modern developer portfolio website designed with a dark, high-contras
 - **Dark Cyber-Neon Aesthetic**: Deep dark background (`#07090f`), violet (`#5550cc`) and cyan (`#3d8fa8`) accents, glassmorphic card surfaces with backdrop blur.
 - **Interactive Particle Starfield**: Canvas-based background with drifting, pulsing stars that respond subtly to viewport size.
 - **Cursor Follower**: Smooth magnetic cursor dot with interpolated movement via `requestAnimationFrame`.
-- **Click Spark Effect**: On any click, 6–7 directional sparks burst from the cursor with randomized length, speed, and decay.
+- **Click Spark Effect**: On any click, 7 directional sparks burst from the cursor with randomized length, speed, and decay.
 - **Rotating Text**: Animated skill/role rotator in the About section with slide-up/slide-down transitions between phrases.
 - **Scroll-Driven Reveal Animations**: Elements fade up into view using `IntersectionObserver` with staggered delays.
-- **Magnetic Interactive Elements**: Buttons, pills, and cards subtly shift toward the cursor within a defined range.
-- **Skill Pills with Physics Fall**: Click any tech-stack pill to trigger a gravity-based fall with bounce and 2-second auto-return.
+- **Magnetic Interactive Elements**: Buttons, pills, and logo subtly shift toward the cursor within a defined range.
+- **Skill Pills with Physics Drop**: Click any tech-stack pill to detach it from the layout and animate a fixed-position clone with gravity, bounce, and squash effect. Original pill stays in place. Clone fades out after 0.8s and is removed. Restitution varies by text length.
+- **Seamless Marquee**: CSS-driven infinite scrolling tech-stack ticker with `16s linear infinite` animation and no gaps.
 - **Expandable Blog Cards**: Each blog card shows a truncated summary; clicking "Read more" expands the full article inline.
 - **FAQ Accordion**: Smooth expand/collapse with rotating plus icon and max-height animation.
 - **Mobile-First Responsive**: Hamburger menu with full-screen overlay, safe-area insets for notched devices, 44px touch targets, and optimized star density on touch devices.
-- **Accessibility**: Skip-to-content link, `prefers-reduced-motion` support (disables particles, sparks, cursor follower, and rotating text), semantic HTML.
+- **Accessibility**: Skip-to-content link, `prefers-reduced-motion` support (disables particles, sparks, cursor follower, rotating text, and marquee), semantic HTML.
+- **SEO & Meta**: `lang="en"`, `theme-color` for mobile browser chrome, Open Graph, Twitter Card, and Schema.org JSON-LD `Person` schema.
 - **Copy-to-Clipboard Networking**: One-click email copy with visual confirmation.
 - **Custom SVG Favicon**: Minimal glowing mark with gold-to-violet gradient.
 
@@ -71,7 +73,8 @@ A premium, modern developer portfolio website designed with a dark, high-contras
 - Click spark burst effect (canvas overlay, 7 sparks per click).
 - Rotating text in About section (5 phrases, 2.2s interval).
 - BorderGlow edge effect on terminal card (cursor-following mesh gradient).
-- Skill pill click-to-fall with physics simulation (gravity, bounce, 2s return).
+- Skill pill clone-based drop physics with gravity, bounce, squash effect, and text-length-based restitution. Original pill stays in layout; clone fades out after 0.8s.
+- Seamless marquee ticker using CSS `16s linear infinite` animation.
 - Scroll progress bar removed per feedback; replaced with staggered `IntersectionObserver` reveal animations.
 
 **Mobile & Accessibility**
@@ -79,10 +82,16 @@ A premium, modern developer portfolio website designed with a dark, high-contras
 - `viewport-fit=cover` and `env(safe-area-inset-*)` for iPhone notch support.
 - Minimum 44px touch targets via `@media (pointer: coarse)`.
 - `-webkit-overflow-scrolling: touch` and `-webkit-text-size-adjust: 100%`.
-- Global `prefers-reduced-motion` support: hides particles, sparks, cursor follower, and pauses rotating text.
+- Global `prefers-reduced-motion` support: hides particles, sparks, cursor follower, rotating text, and marquee.
+
+**SEO & Meta**
+- Added `lang="en"` to `<html>` for accessibility and SEO.
+- Added `<meta name="theme-color" content="#07090f">` for mobile browser chrome matching.
+- Added Schema.org JSON-LD `Person` schema with name, job title, social links, and skills.
 
 **Content Updates**
 - Project cards restructured with colored preview tile, number pill, inline arrow button, and proportional card sizing.
+- Project preview blob visibility increased (`160px`, `0.55` base opacity, `0.40` hover opacity).
 - Blog summaries truncated with `...`; full text hidden until "Read more" is clicked.
 - Testimonial names updated with provided real names/companies.
 - Resume year corrected to `2025–Present` for BTech AIML.
